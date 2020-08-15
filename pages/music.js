@@ -1,5 +1,3 @@
-// 음악데이터 삽입 기능 구현,
-// 올려진 음원데이터 편집(곡제목, 아티스트이름, 음원수정 등) 기능 구현
 import Link from 'next/link';
 
 const mockMusic = [
