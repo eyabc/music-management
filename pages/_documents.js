@@ -4,7 +4,10 @@ export default class CustomDocument extends Document {
     render() {
         return (
             <html>
-                <Head></Head>
+                <Head>
+                    <meta charSet="utf-8" />
+                    <title>Music Manager</title>
+                </Head>
                 <body>
                     <Main />
                     <NextScript />
