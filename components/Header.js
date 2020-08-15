@@ -4,7 +4,7 @@ import Link from 'next/link'
 const Header = () => (
     <>
         <span class={ 'logo' }>
-            Music Manager
+            <Link href={'/'}> Music Manager</Link>
         </span>
         <form class={ 'title-search' } action="">
             <input type="text"/>
