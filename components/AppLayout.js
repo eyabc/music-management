@@ -1,15 +1,14 @@
 import React from 'react';
-import Link from 'next/link';
+import Header from './Header';
 
 const AppLayout = ({ children }) => (
   <>
-      <header>
+      <Header>
           header
-      </header>
+      </Header>
+      <hr/>
       { children }
-      <footer>
-          footer
-      </footer>
+      <hr/>
   </>
 );
 
