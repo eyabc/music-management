@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link'
 
-const Header = () => (
+const Header = ({ }) => (
     <>
         <span class={ 'logo' }>
             <Link href={'/'}> Music Manager</Link>
@@ -15,7 +15,9 @@ const Header = () => (
                 <Link href={'/sign-in'}>로그인</Link>
             </button>
             <button><Link href={'/sign-up'} class={ 'sign-up' }>회원가입</Link></button>
+            <button><Link href={'/my-profile'} class={ 'my-profile' }>내정보</Link></button>
         </div>
+
     </>
 );
 

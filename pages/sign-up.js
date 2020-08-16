@@ -8,7 +8,6 @@ const SignUp = () => {
                 <title>로그인</title>
             </Head>
             <AppLayout>
-                <h1>로그인</h1>
                 <form action="post">
                     <ul>
                         <li>

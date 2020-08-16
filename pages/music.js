@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 const mockMusic = [
     {
+        id: 0,
         path: 'https://musicmanager.com/1',
         title: 'spring',
         artist: 'vivaldi',
@@ -9,6 +10,7 @@ const mockMusic = [
         track: 'four seasons 1',
     },
     {
+        id: 1,
         path: 'https://musicmanager.com/2',
         title: 'summer',
         artist: 'vivaldi',
@@ -16,6 +18,7 @@ const mockMusic = [
         track: 'four seasons 2',
     },
     {
+        id: 2,
         path: 'https://musicmanager.com/3',
         title: 'bees',
         artist: 'Tchaikovsky',
@@ -23,6 +26,7 @@ const mockMusic = [
         track: 'Symphony 1',
     },
     {
+        id: 3,
         path: 'https://musicmanager.com/4',
         title: 'ballet',
         artist: 'Tchaikovsky',
@@ -45,7 +49,7 @@ const Music = () => {
                                 <span>{ item.artist }</span>
                                 <span>{ item.album }</span>
                                 <span>{ item.track }</span>
-                                <button><Link href={'/edit-music'}>edit</Link></button>
+                                <button><Link href={`/edit-music?id=${item.id}`}>edit</Link></button>
                             </li>
                         );
                     })
