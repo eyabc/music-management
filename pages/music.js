@@ -38,7 +38,7 @@ const mockMusic = [
 const Music = () => {
     return (
         <div>
-            <button><Link href={'/add-music'}>음원 추가</Link></button>
+            <button><Link href={ '/add-music' }>음원 추가</Link></button>
             <ul>
                 {
                     mockMusic.map((item, key) => {
@@ -49,7 +49,7 @@ const Music = () => {
                                 <span>{ item.artist }</span>
                                 <span>{ item.album }</span>
                                 <span>{ item.track }</span>
-                                <button><Link href={`/edit-music?id=${item.id}`}>edit</Link></button>
+                                <button><Link href={ `/edit-music?id=${ item.id }` }>edit</Link></button>
                             </li>
                         );
                     })
