@@ -1,11 +1,6 @@
-import Head from 'next/head';
-
 const EditMusic = () => {
     return (
         <>
-            <Head>
-                <title>음원 편집하기</title>
-            </Head>
             <form action="">
                 <ul>
                     <li>

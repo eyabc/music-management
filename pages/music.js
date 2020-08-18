@@ -1,60 +1,56 @@
 import Link from 'next/link';
+import { useRecoilValue } from 'recoil';
+import { musicState, musicListState } from '../recoil/atoms';
+import { useRecoilState } from 'recoil/dist';
+import { pageTitleAtom } from '../recoil/common';
 
-const mockMusic = [
-    {
-        id: 0,
-        path: 'https://musicmanager.com/1',
-        title: 'spring',
-        artist: 'vivaldi',
-        album: 'four seasons',
-        track: 'four seasons 1',
-    },
-    {
-        id: 1,
-        path: 'https://musicmanager.com/2',
-        title: 'summer',
-        artist: 'vivaldi',
-        album: 'four seasons',
-        track: 'four seasons 2',
-    },
-    {
-        id: 2,
-        path: 'https://musicmanager.com/3',
-        title: 'bees',
-        artist: 'Tchaikovsky',
-        album: 'Symphony',
-        track: 'Symphony 1',
-    },
-    {
-        id: 3,
-        path: 'https://musicmanager.com/4',
-        title: 'ballet',
-        artist: 'Tchaikovsky',
-        album: 'Symphony',
-        track: 'Symphony 2',
-    },
-];
+
+const MusicItem = ({ id, key }) => {
+    const [, setTitle] = useRecoilState(pageTitleAtom);
+    const {
+        path,
+        title,
+        artist,
+        album,
+        track,
+    } = useRecoilValue(musicState(id));
+    return (
+        <li>
+            <span>{ key }.</span>
+            <span>{ title }</span>
+            <span>{ artist }</span>
+            <span>{ album }</span>
+            <span>{ track }</span>
+            <Link a href={ `/edit-music?id=${ id }` }>
+                <button onClick={() => setTitle('음원 수정하기')}>edit</button>
+            </Link>
+        </li>
+    );
+};
+
+const Musics = () => {
+    const musicList = useRecoilValue(musicListState);
+    return (
+        <ul className={ 'musics' }>
+            {
+                musicList.map((id, key) => (
+                    <MusicItem id={ id } key={ key }/>
+                ))
+            }
+        </ul>
+    );
+
+};
+
 
 const Music = () => {
+    const [, setTitle] = useRecoilState(pageTitleAtom);
     return (
         <div>
-            <button><Link href={ '/add-music' }>음원 추가</Link></button>
-            <ul>
-                {
-                    mockMusic.map((item, key) => {
-                        return (
-                            <li>
-                                <span>{ key }.</span>
-                                <span>{ item.title }</span>
-                                <span>{ item.artist }</span>
-                                <span>{ item.album }</span>
-                                <span>{ item.track }</span>
-                                <button><Link href={ `/edit-music?id=${ item.id }` }>edit</Link></button>
-                            </li>
-                        );
-                    })
-                }
-            </ul>
+            <Link href={ '/add-music' }>
+                <button onClick={ () => setTitle('음원 추가') }>음원 추가</button>
+            </Link>
+            <Musics/>
         </div>
     );
 };

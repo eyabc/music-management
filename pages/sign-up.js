@@ -3,9 +3,6 @@ import Head from 'next/head';
 const SignUp = () => {
     return (
         <>
-            <Head>
-                <title>로그인</title>
-            </Head>
             <form action="post">
                 <ul>
                     <li>

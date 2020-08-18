@@ -3,10 +3,6 @@ import Head from 'next/head';
 const SignIn = () => {
     return (
         <>
-            <Head>
-                <title>로그인</title>
-            </Head>
-            <h1>로그인</h1>
             <form action="">
                 <ul>
                     <li>
