@@ -31,7 +31,7 @@ const Musics = () => {
 
     const getMusicList = async () => {
         try {
-            const { data } = await utils.client().get('/music');
+            const { data } = await utils.client().get('/musics');
             setMusicListAtom(data.music);
         } catch (error) {
             console.log(error.message);
