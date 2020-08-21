@@ -9,12 +9,12 @@ const NotUserHeader = () => {
     return (
         <>
             <Link href={ '/sign-in' }>
-                <button class={ 'sign-in' } onClick={() => setTitle('로그인')}>
+                <button className={ 'sign-in' } onClick={() => setTitle('로그인')}>
                     로그인
                 </button>
             </Link>
-            <Link href={ '/sign-up' } class={ 'sign-up' }>
-                <button onClick={() => setTitle('회원가입')}>회원가입</button>
+            <Link href={ '/sign-up' }>
+                <button className={ 'sign-up' } onClick={() => setTitle('회원가입')}>회원가입</button>
             </Link>
 
         </>
