@@ -19,15 +19,15 @@ const SignIn = () => {
                 login_id: loginId,
                 login_password: loginPassword,
             };
-            const result = await utils.client().post('/user/sign-in', body);
+            const { data } = await utils.client().post('/user/sign-in', body);
 
-            if (result.data.code === 1){
-                alert(result.data.message);
+            if (data.code === 1){
+                alert(data.message);
                 return;
             }
 
             alert('로그인 성공');
-            setUser(result);
+            setUser(data.result);
             setPageTitle(undefined);
             await Router.push('/');
         } catch (error) {
