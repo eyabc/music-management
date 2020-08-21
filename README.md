@@ -1,7 +1,10 @@
 # music-management
 
 ## 프론트 (제한 없음)
-- next / typescript
+next.js
+
+## AWS 
+ES2 RDS
 
 ## 백앤드
 - 서버사이드: node.js es6이상 사용해주세요.
@@ -22,3 +25,10 @@
 - 최소 요구사항 회원명, 회원아이디 , 패스워드
 
 4. aws인프라를 이용해서 개발해주시고, github 또는 gitlab에 프로젝트 올려주세요. 프로젝트url과 함께 실배포한 url(IP)도 같이 보내주세요
+
+## Remains
+- [ ] refactoring
+- [ ] typescript
+- [ ] testing 
+- [ ] style
+- [ ] 권한체크
