@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRecoilState } from 'recoil/dist';
 import { pageTitleAtom } from '../recoil/common';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import * as musicMetadata from 'music-metadata-browser';
 import utils, { trackParse } from '../utils';
 import Router from 'next/router'
@@ -9,7 +9,7 @@ import Router from 'next/router'
 const AddMusic = () => {
     const [, setPageTitle] = useRecoilState(pageTitleAtom);
 
-    const [musicFile, setMusicFile] = useState('');
+    const $file = useRef('');
     const [musicTitle, setMusicTitle] = useState('');
     const [artist, setArtist] = useState('');
     const [album, setAlbum] = useState('');
@@ -17,7 +17,12 @@ const AddMusic = () => {
 
     const deleteMusicFile = (event) => {
         event.preventDefault();
-        setMusicFile(null);
+        $file.current.value = '';
+        setMusicTitle('');
+        setAlbum('');
+        setTrack('');
+        setArtist('');
+        setMusicTitle('');
     };
 
     const changeMusicTitle = (event) => setMusicTitle(event.target.value);
@@ -27,9 +32,9 @@ const AddMusic = () => {
         event.preventDefault();
 
         const file = event.target.files[0];
+
         const { common } = await musicMetadata.parseBlob(file);
 
-        setMusicFile(file);
         setMusicTitle(common.title);
         setAlbum(common.album);
         setTrack(common.track);
@@ -45,7 +50,8 @@ const AddMusic = () => {
             body.append('album', album);
             body.append('track', JSON.stringify(track));
             body.append('artist', artist);
-            body.append('file', musicFile);
+            body.append('file', $file.current.files[0]);
+
             await utils.client().post('/music', body);
 
             alert('음원이 추가되었습니다!');
@@ -57,7 +63,6 @@ const AddMusic = () => {
         }
     };
 
-
     return (
         <>
             <form action="post" onSubmit={ uploadMusic }>
@@ -68,6 +73,7 @@ const AddMusic = () => {
                                accept="audio/*"
                                name={ 'music-file' }
                                onChange={ changeMusicFile }
+                               ref={$file}
                                required/>
                         <button onClick={ deleteMusicFile }>삭제</button>
                     </li>
