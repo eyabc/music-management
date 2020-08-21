@@ -32,3 +32,4 @@ ES2 RDS
 - [ ] testing 
 - [ ] style
 - [ ] 권한체크
+- [ ] 에러 해결

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
-import { musicListAtom } from '../recoil/music';
+import { musicFilterAtom, musicListAtom } from '../recoil/music';
 import { useRecoilState } from 'recoil/dist';
 import { pageTitleAtom } from '../recoil/common';
 import { userAtom } from '../recoil/user';
@@ -28,7 +28,7 @@ const MusicItem = ({ music, idx }) => {
 
 const Musics = () => {
     const [musicList, setMusicListAtom] = useRecoilState(musicListAtom);
-
+    const filter = useRecoilValue(musicFilterAtom);
     const getMusicList = async () => {
         try {
             const { data } = await utils.client().get('/musics');
@@ -41,6 +41,14 @@ const Musics = () => {
         getMusicList();
     }, []);
 
+    const filteredMusicList = (function() {
+        let regex = new RegExp(filter, 'i');
+
+        const result = musicList.filter(music => regex.test(music.title));
+        return result;
+    });
+
+
     return (
         <table style={{width: 100+'%'}}>
             <tr style={{textAlign: 'left'}}>
@@ -52,7 +60,7 @@ const Musics = () => {
                 <th>edit</th>
             </tr>
             {
-                musicList && musicList.map((music, idx) => (
+                musicList && filteredMusicList()?.map((music, idx) => (
                     <MusicItem music={ music } idx={ idx }/>
                 ))
             }
