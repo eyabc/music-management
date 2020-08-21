@@ -27,6 +27,7 @@ const SignIn = () => {
             }
 
             alert('로그인 성공');
+            localStorage.setItem('user', JSON.stringify(data.result));
             setUser(data.result);
             setPageTitle(undefined);
             await Router.push('/');
