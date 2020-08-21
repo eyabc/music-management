@@ -27,7 +27,7 @@ const EditMusic = () => {
             const {
                 data: {
                     music:
-                        { title, album, track, artist, path },
+                        { title, album, track, artist },
                 },
             } = await utils.client().get(`/music?id=${ id }`);
             setMusicTitle(title);
@@ -86,6 +86,8 @@ const EditMusic = () => {
             console.log(...body);
             await utils.client().post('/update-music', body);
             alert('음원편집이 적용되었습니다!');
+            setPageTitle(undefined);
+            await Router.push('/');
 
         } catch (error) {
             console.log(error);
