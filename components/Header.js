@@ -17,11 +17,11 @@ const Header = () => {
                 <title>{ globalVariables.serviceName } {pageTitle && `| ${pageTitle}`}</title>
             </Head>
             <Link href={ '/' }>
-                <a class={ 'logo' } onClick={() => setTitle(undefined)}>
+                <a className={ 'logo' } onClick={() => setTitle(undefined)}>
                     Music Manager
                 </a>
             </Link>
-            <form class={ 'title-search' } action="">
+            <form className={ 'title-search' } action="">
                 <input type="text"/>
                 <button onClick={() => setTitle('검색결과')}>검색</button>
             </form>
