@@ -7,5 +7,8 @@ const utils = {
     }
 };
 
+export const trackParse = (track) =>
+    (track.no ?? '') + (track.of ? (' of '+ track.of) : '');
+
 export default utils;
 

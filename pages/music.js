@@ -1,55 +1,76 @@
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
-import { musicState, musicListState } from '../recoil/atoms';
+import { musicListAtom } from '../recoil/music';
 import { useRecoilState } from 'recoil/dist';
 import { pageTitleAtom } from '../recoil/common';
+import { userAtom } from '../recoil/user';
+import utils, { trackParse } from '../utils';
+import { useEffect } from 'react';
 
 
-const MusicItem = ({ id, key }) => {
-    const [, setTitle] = useRecoilState(pageTitleAtom);
-    const {
-        path,
-        title,
-        artist,
-        album,
-        track,
-    } = useRecoilValue(musicState(id));
+const MusicItem = ({ music, idx }) => {
+    const [, setPageTitle] = useRecoilState(pageTitleAtom);
     return (
-        <li>
-            <span>{ key }.</span>
-            <span>{ title }</span>
-            <span>{ artist }</span>
-            <span>{ album }</span>
-            <span>{ track }</span>
-            <Link a href={ `/edit-music?id=${ id }` }>
-                <button onClick={() => setTitle('음원 수정하기')}>edit</button>
-            </Link>
-        </li>
+        <tr key={idx}>
+            <td>{ idx }.</td>
+            <td>{ music.title }</td>
+            <td>{ music.artist }</td>
+            <td>{ music.album }</td>
+            <td>{ trackParse(JSON.parse(music.track)) }</td>
+            <td>
+                <Link a href={ `/edit-music?id=${ music.id }` }>
+                    <button onClick={ () => setPageTitle('음원 편집') }>edit</button>
+                </Link>
+            </td>
+        </tr>
     );
 };
 
 const Musics = () => {
-    const musicList = useRecoilValue(musicListState);
+    const [musicList, setMusicListAtom] = useRecoilState(musicListAtom);
+
+    const getMusicList = async () => {
+        try {
+            const { data } = await utils.client().get('/music');
+            setMusicListAtom(data.music);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+    useEffect(() => {
+        getMusicList();
+    }, []);
+
     return (
-        <ul className={ 'musics' }>
+        <table style={{width: 100+'%'}}>
+            <tr style={{textAlign: 'left'}}>
+                <th>No.</th>
+                <th>title</th>
+                <th>artist</th>
+                <th>album</th>
+                <th>track</th>
+                <th>edit</th>
+            </tr>
             {
-                musicList.map((id, key) => (
-                    <MusicItem id={ id } key={ key }/>
+                musicList && musicList.map((music, idx) => (
+                    <MusicItem music={ music } idx={ idx }/>
                 ))
             }
-        </ul>
+        </table>
     );
-
 };
-
 
 const Music = () => {
     const [, setTitle] = useRecoilState(pageTitleAtom);
+    const user = useRecoilValue(userAtom);
     return (
         <div>
-            <Link href={ '/add-music' }>
-                <button onClick={ () => setTitle('음원 추가') }>음원 추가</button>
-            </Link>
+            {
+                user &&
+                <Link href={ '/add-music' }>
+                    <button onClick={ () => setTitle('음원 추가') }>음원 추가</button>
+                </Link>
+            }
             <Musics/>
         </div>
     );
