@@ -27,12 +27,12 @@ ES2 RDS
 4. aws인프라를 이용해서 개발해주시고, github 또는 gitlab에 프로젝트 올려주세요. 프로젝트url과 함께 실배포한 url(IP)도 같이 보내주세요
 
 ## Remains
-- [ ] refactoring
-- [ ] typescript
-- [ ] testing 
-- [ ] style
-- [ ] 권한체크
-- [ ] 에러 해결
+- [X] refactoring
+- [X] typescript
+- [X] testing 
+- [X] style
+- [X] 권한체크
+- [X] 에러 해결
 
 ## 피드백
 ```
